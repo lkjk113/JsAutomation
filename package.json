@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cucumber": "./node_modules/.bin/cucumber-js  ./features -r ./steps"
   },
   "author": "John Yue",
   "license": "ISC",
   "dependencies": {
     "chromedriver": "^2.41.0",
+    "cucumber": "^4.2.1",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }
 }
