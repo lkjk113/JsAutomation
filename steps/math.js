@@ -1,16 +1,18 @@
 const defineSupportCode = require('cucumber').defineSupportCode;
+const assert = require('assert');
 
 defineSupportCode(function({ Given, Then, When }) {
-  Given('I start with {int}', function (int, callback) {
-    // Write code here that turns the phrase above into concrete actions
-    callback(null, 'pending');
+let a;
+let b;
+
+
+  Given('I start with {int}', function (int) {
+     a=int;
   });
-  When('I add {int}', function (int, callback) {
-    // Write code here that turns the phrase above into concrete actions
-    callback(null, 'pending');
+  When('I add {int}', function (int) {
+    b=a+int;
   });
-  Then('I end up with {int}', function (int, callback) {
-    // Write code here that turns the phrase above into concrete actions
-    callback(null, 'pending');
+  Then('I end up with {int}', function (int) {
+    assert.equal(b,int);
   });
 });
