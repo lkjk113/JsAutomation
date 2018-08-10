@@ -1,6 +1,5 @@
 const { Given, When, Then } = require('cucumber');
 const assert = require('assert');
-
 require('chromedriver');
 var webdriver = require('selenium-webdriver')
 By = webdriver.By,
@@ -11,7 +10,8 @@ var driver = new webdriver.Builder()
 
 Given('I go to {string}', async function (url) {
   driver.get(url);
-  return await driver.sleep(4000);
+  driver.sleep(2000);
+  //driver.wait(until(),200)
 });
 
 When('I input {string} in searchbox', async function (value) {
@@ -19,12 +19,12 @@ When('I input {string} in searchbox', async function (value) {
 });
 
 Then('I click button search', async function () {
-  return await driver.findElement(By.id('su')).click();
+  return await driver.findElement({ id: "su" }).click();
 });
 
 Then('I show see results more than {int}', async function (expnum) {
-  driver.sleep(8000);
-  let label = driver.findElement({ css: ".nums_text" }).getText();
+  driver.sleep(3000);
+  let result = await driver.findElement(By.className('nums_text')).getText();
   let num = (result + "").replace(/[^0-9]/ig, "");
-  return await assert.ok(parseFloat(num) > parseFloat(expnum), "expect:" + expnum + ",actual:" + result);
+  return await assert.ok(parseFloat(num) > parseFloat(expnum), "expect:" + expnum + ",actual:" + num);
 });

@@ -1,9 +1,9 @@
-require('chromedriver');
+require('iedriver');
 var webdriver = require('selenium-webdriver')
 By = webdriver.By,
 until = webdriver.until;
 var driver = new webdriver.Builder()
-    .forBrowser('chrome')
+    .forBrowser('ie')
     .build();
 
 driver.get('https://www.baidu.com');
