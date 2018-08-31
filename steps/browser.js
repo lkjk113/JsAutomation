@@ -1,12 +1,27 @@
-const { Given, When, Then } = require('cucumber');
+const { Given, When, Then, After, AfterAll, Status  } = require('cucumber');
 const assert = require('assert');
 require('chromedriver');
-var webdriver = require('selenium-webdriver')
-By = webdriver.By,
-  until = webdriver.until;
-var driver = new webdriver.Builder()
+const webdriver = require('selenium-webdriver')
+const By = webdriver.By;
+const until = webdriver.until;
+const driver = new webdriver.Builder()
   .forBrowser('chrome')
   .build();
+
+After(function (testCase) {
+  if (testCase.result.status === Status.FAILED) {
+    driver.takeScreenshot().then(function (screenShot) {
+      // screenShot is a base-64 encoded PNG
+      return this.attach(screenShot, 'image/png');
+    });
+  }
+
+});
+
+AfterAll(function () {
+  // perform some shared teardown
+  return driver.quit();
+});
 
 Given('I go to {string}', async function (url) {
   driver.get(url);
